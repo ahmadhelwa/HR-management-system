@@ -13,8 +13,6 @@ this.Department=Department,
 this.Level=Level,
 this.imageURL=imageURL,
 
-
-  
 allEmployee.push(this);
 
 }
@@ -22,70 +20,79 @@ allEmployee.push(this);
 
 
 Employee.prototype.salary = function()
-{
+ {
     let sumSalary = 0 ;
 
-if(`${this.Level}` == "senior")
-{
+   if(`${this.Level}` == 'senior')
+   {
  
    max = 2000;
    min =1500;
   sumSalary = (Math.floor(Math.random() * (max - min + 1)) + min);
-}
- else if (`${this.Level}` == "mid-senior")
-{
+  }
+    else if (`${this.Level}` == 'mid-senior')
+  {
       max = 1500;
       min= 1000;
 
     sumSalary =  (Math.floor(Math.random() * (max - min + 1)) + min);
-}
+  }
 
  else  
 
-{
+  {
 
     let min  = 500;
-   let  max = 1000;   
+    let  max = 1000;   
     sumSalary =  (Math.floor(Math.random() * (max - min + 1)) + min);
 
-}
+  }
 
-return `   ${sumSalary - (sumSalary * ( 7.5 / 100 ))}` ;
+return ` ${sumSalary - (sumSalary * ( 7.5 / 100 ))}` ;
 }
 
 
 Employee.prototype.render = function () {
  
 
-  let create2 = document.createElement("div");
-section.appendChild(create2);
+  let divcard = document.createElement("div");
 
-let image = document.createElement("img");
-image.src = this.imageURL;
-image.className = "image1";
-image.style.width="50px";
-image.style.height="50px";
 
-create2.appendChild(image);
+    section.appendChild(divcard);
 
-let create1 = document.createElement("h3");
-create1.textContent = this.fullName;
-create2.appendChild(create1);
+   let image = document.createElement("img");
+   image.src = this.imageURL;
+   image.className = "image1";
+   image.style.width="50px";
+   image.style.height="50px";
+   divcard.appendChild(image);
 
-let price1 = document.createElement("h3");
-price1.textContent = this.Department;
-create2.appendChild(price1);
 
-let price2 = document.createElement("h3");
-price2.textContent = this.Level;
-create2.appendChild(price2);
 
-let number1 = document.createElement("h3");
-number1.textContent = ` ${sum()}`;
-create2.appendChild(number1);
+    let name = document.createElement("h3");
+    name.textContent = `${this.fullName}`;
+    divcard.appendChild(name);
+
+   
+    let Department = document.createElement("h3");
+    Department.textContent = this.Department;
+    divcard.appendChild(Department);
+
+    let level = document.createElement("h3");
+    level.textContent = this.Level;
+    divcard.appendChild(level);
+
+  
+   let number1 = document.createElement("h3");
+   number1.textContent = ` ${sum()}`;
+   divcard.appendChild(number1);
+
+   let salary = document.createElement("h2");
+   salary.textContent =  `${this.salary()}`;
+   divcard.appendChild(salary);
 
 };
- function sum () 
+   function sum () 
 {
    
   return  Math.floor(1000 + Math.random() * 9000)
@@ -96,11 +103,13 @@ let employee3 = new Employee ("1002" , "Tamara Ayoub" , "Marketing" ,    "senior
 let employee4 = new Employee ("1003" , "Safi Walid	" , "Administration","mid-senior"  ,"img/Lana.jpg");
 let employee5 = new Employee ("1004" , "Omar Zaid	" , "Development" ,  "senior"  ,"img/Omar.jpg");
 let employee6 = new Employee ("1005" , "Rana Saleh	" , "Development" ,  "junior"  , "img/Rana.jpg" );
-let employee7 = new Employee ("1006" , "Hadi Ahmad	" , "AFinance" ,     "mid-senior"  , "img/Tamara.jpg" );
+let employee7 = new Employee ("1006" , "Hadi Ahmad	" , "Finance" ,     "mid-senior"  , "img/Tamara.jpg" );
 
 for (let i = 0; i < allEmployee.length; i++) {
-  allEmployee[i].salary();
+ 
   allEmployee[i].render();
+
+  // allEmployee[i].salary();
   
 }
 
@@ -113,11 +122,12 @@ function submet(event) {
   console.log("from event", event);
 
   let name = event.target.name.value;
-  let department = event.target.select1.value;
-  let level = event.target.select2.value;
-  let image = event.target.image.src;
+  let department=event.target.department.value;
+  let level = event.target.level.value;
+  let image = event.target.image.value;
 
-  let drinks = new Employee(name, department, level, image);
+  let drinks = new Employee("" , name , department, level, image);
+  
   console.log(drinks);
 
   drinks.render();

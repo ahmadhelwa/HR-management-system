@@ -4,11 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HR-management-system</title>
     <link rel="stylesheet" href="index.css">
     <style>
+form {
 
+    padding: 10px;
+    margin: 10px;
+    background-color: #383838;
+}
 select {
   width: 100%;
   padding: 12px 20px;
@@ -21,7 +25,7 @@ select {
 
 input[type=submit] {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #066163;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -53,10 +57,10 @@ div {
 
                 <ul class"nav_link">
                     <li>
-                        <a href="#">home</a>
+                        <a href="#">Home</a>
                     </li>
                     <li>
-                        <a href="about.html">about</a>
+                        <a href="about.html">About</a>
                     </li>
                    
                     </li>
@@ -74,11 +78,14 @@ div {
 
         
 
-            <form action="" id="form1">
+            <form id="form1">
                 <label for="name"> name:</label>
                 <input type="text" id="name" name="name" value="" placeholder="your name"><br>
 
-                <select name="select" id="select1">
+                <!-- <label for="name"> ID :</label>
+                <input type="text" id="id" name="id" value="id" placeholder="your id"><br> -->
+
+                <select name="select" id="department">
                     <option value="Administration">Administration </option>
                     <option value="Marketing" selected> Marketing </option>
                     <option value="Development"> Development</option>
@@ -87,14 +94,14 @@ div {
                 </select><br>
                 
 
-                <select name="select2" id="select2">
-                    <option value="Junior">Junior </option>
-                    <option value="Mid-Senior" selected> Mid-Senior
+                <select name="select2" id="level">
+                    <option value="junior"> junior </option>
+                    <option value="mid-senior" selected> mid-senior
                     </option>
-                    <option value="Senior"> Senior </option>
+                    <option value="senior"> senior </option>
                    
                 </select><br>
-                <label for="image"> image:</label>
+                <label for="image"> image: </label>
                 <input type="text" id="image" name="image" value="" placeholder="url"><br>
                 <input type="submit" value="Submit" id="btn">
             </form>
