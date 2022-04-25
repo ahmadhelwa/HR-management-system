@@ -3,16 +3,16 @@
 let section = document.getElementById("container");
 
 let allEmployee = [];
-function Employee(employeeID,fullName,Department,Level,imageURL,salary)
+function Employee(fullName,Department,Level,imageURL)
     
 {
 
-this.employeeID=employeeID,
+// this.employeeID=employeeID,
 this.fullName=fullName,
 this.Department=Department,
 this.Level=Level,
 this.imageURL=imageURL,
-
+// this.salary=salary1;
 allEmployee.push(this);
 
 }
@@ -47,6 +47,8 @@ Employee.prototype.salary = function()
     sumSalary =  (Math.floor(Math.random() * (max - min + 1)) + min);
 
   }
+
+
 
 return ` ${sumSalary - (sumSalary * ( 7.5 / 100 ))}` ;
 }
@@ -84,7 +86,7 @@ Employee.prototype.render = function () {
 
   
    let number1 = document.createElement("h3");
-   number1.textContent = ` ${sum()}`;
+   number1.textContent = ` ${sum1()}`;
    divcard.appendChild(number1);
 
    let salary = document.createElement("h2");
@@ -92,24 +94,31 @@ Employee.prototype.render = function () {
    divcard.appendChild(salary);
 
 };
-   function sum () 
+   function sum1 () 
 {
    
   return  Math.floor(1000 + Math.random() * 9000)
   
 }
-let employee2 = new Employee ("1001" , "Lana Ali	" , "Finance" ,      "senior"  , "img/Ghazi.jpg" );
-let employee3 = new Employee ("1002" , "Tamara Ayoub" , "Marketing" ,    "senior"  , "img/Hadi.jpg" );
-let employee4 = new Employee ("1003" , "Safi Walid	" , "Administration","mid-senior"  ,"img/Lana.jpg");
-let employee5 = new Employee ("1004" , "Omar Zaid	" , "Development" ,  "senior"  ,"img/Omar.jpg");
-let employee6 = new Employee ("1005" , "Rana Saleh	" , "Development" ,  "junior"  , "img/Rana.jpg" );
-let employee7 = new Employee ("1006" , "Hadi Ahmad	" , "Finance" ,     "mid-senior"  , "img/Tamara.jpg" );
 
-for (let i = 0; i < allEmployee.length; i++) {
+
+let employee2 = new Employee ("Lana Ali	" , "Finance" ,      "senior"  , "img/Ghazi.jpg" );
+let employee3 = new Employee ( "Tamara Ayoub" , "Marketing" ,    "senior"  , "img/Hadi.jpg"  );
+let employee4 = new Employee ( "Safi Walid	" , "Administration","mid-senior"  ,"img/Lana.jpg");
+let employee5 = new Employee (  "Omar Zaid	" , "Development" ,  "senior"  ,"img/Omar.jpg");
+let employee6 = new Employee ( "Rana Saleh	" , "Development" ,  "junior"  , "img/Rana.jpg"  );
+let employee7 = new Employee ( "Hadi Ahmad	" , "Finance" ,     "mid-senior"  , "img/Tamara.jpg" );
+
+
+function renderAll(){
+for (let i = 0; i < allEmployee.length; i++)
+{
  
   allEmployee[i].render();
+  // allEmployee[i].renderTable();
 
-  // allEmployee[i].salary();
+}
+
   
 }
 
@@ -119,18 +128,196 @@ form.addEventListener("submit", submet);
 
 function submet(event) {
   event.preventDefault();
-  console.log("from event", event);
+  // console.log("from event", event);
 
   let name = event.target.name.value;
   let department=event.target.department.value;
   let level = event.target.level.value;
   let image = event.target.image.value;
 
-  let drinks = new Employee("" , name , department, level, image);
   
-  console.log(drinks);
+
+  let drinks = new Employee( name , department, level, image);
+ 
 
   drinks.render();
-
-
+  savedata(allEmployee);
 }
+
+
+function savedata(data)
+{
+ 
+  let stringdata =JSON.stringify(data);
+  localStorage.setItem("drinks",stringdata);
+  
+}
+
+function gitdata()
+{
+  let returndata = localStorage.getItem("drinks");
+  let arraydata =JSON.parse(returndata);
+
+
+
+       
+       if (arraydata != null)
+           
+  {
+  
+    for (let i = 0; i < arraydata.length; i++)
+    {   
+    let key = new Employee(arraydata[i].fullName , arraydata[i].Department, arraydata[i].Level, arraydata[i].image);
+    let returndata = localStorage.getItem(key);
+    
+  }
+  
+  }
+
+  renderAll();
+}
+
+gitdata();
+
+   let table = document.getElementById("table");
+   let tbody = document.getElementById("tbody");
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+// --------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+      function renderTable ()
+  
+   {
+ 
+ 
+ 
+ 
+      let trname = document.createElement('tr');
+      tbody.appendChild(trname);   
+ 
+
+      let td = document.createElement('td');
+ 
+      td.textContent= ` allDepartment`;
+      trname.appendChild(td);   
+
+      let td1 = document.createElement('td');
+ 
+      td1.textContent=  `${number1()}`;
+      trname.appendChild(td1);   
+ 
+      let td2 = document.createElement('td');
+ 
+      td2.textContent=  `${salary2()}`;
+      trname.appendChild(td2);   
+ 
+      let td3 = document.createElement('td');
+ 
+      td3.textContent=  `${avgsalary2()}`;
+      trname.appendChild(td3);   
+ 
+ 
+ 
+ 
+   }
+
+  
+   function number1()
+   {
+     let sum = 0 ;
+     for (let i=0 ; i < allEmployee.length ; i++ )
+     {
+ if (`${Employee.Department}` == 'Finance' || 'Marketing' || 'Administration' || 'Development')
+ {
+   sum+=1;
+ }
+}
+return sum;
+
+ }
+
+ function salary2()
+ {
+   sum = 0 ;
+  let salaryemp = 0;
+  for (let i=0 ; i < allEmployee.length ; i++ )
+  {
+
+     if(`${this.Level}` == 'senior')
+   {
+ 
+   max = 2000;
+   min =1500;
+  sumSalary = (Math.floor(Math.random() * (max - min + 1)) + min);
+  }
+    else if (`${this.Level}` == 'mid-senior')
+  {
+      max = 1500;
+      min= 1000;
+
+    sumSalary =  (Math.floor(Math.random() * (max - min + 1)) + min);
+  }
+
+ else  
+
+  {
+
+    let min  = 500;
+    let  max = 1000;   
+    sumSalary =  (Math.floor(Math.random() * (max - min + 1)) + min);
+
+  }
+ sum+=sumSalary;
+   
+  }
+
+  
+return sum;
+
+ }
+ 
+ function avgsalary2()
+ {
+   sum = 0 ;
+  let salaryemp = 0;
+  for (let i=0 ; i < allEmployee.length ; i++ )
+  {
+
+
+    
+
+ sum+=sumSalary;
+   
+  }
+
+  
+return sum/allEmployee.length;
+
+ }
+renderTable ();
